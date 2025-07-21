@@ -3,7 +3,6 @@ package gitea
 import (
 	"io"
 	"net/http"
-	"strings"
 
 	"github.com/tifisht/caddy-gitea/pkg/gitea"
 	"github.com/caddyserver/caddy/v2"
