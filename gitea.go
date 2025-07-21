@@ -80,22 +80,22 @@ func (m *Middleware) UnmarshalCaddyfile(d *caddyfile.Dispenser) error {
 // ServeHTTP performs gitea content fetcher.
 func (m Middleware) ServeHTTP(w http.ResponseWriter, r *http.Request, _ caddyhttp.Handler) error {
 	// remove the domain if it's set (works fine if it's empty)
-	host := strings.TrimRight(strings.TrimSuffix(r.Host, m.Domain), ".")
-	h := strings.Split(host, ".")
+	//host := strings.TrimRight(strings.TrimSuffix(r.Host, m.Domain), ".")
+	//h := strings.Split(host, ".")
 
-	fp := h[0] + r.URL.Path
+	fp := "fly316" + "/" + "fly316-docs" + r.URL.Path
 	ref := r.URL.Query().Get("ref")
 
 	// if we haven't specified a domain, do not support repo.username and branch.repo.username
-	if m.Domain != "" {
-		switch {
-		case len(h) == 2:
-			fp = h[1] + "/" + h[0] + r.URL.Path
-		case len(h) == 3:
-			fp = h[2] + "/" + h[1] + r.URL.Path
-			ref = h[0]
-		}
-	}
+	//if m.Domain != "" {
+	//	switch {
+	//	case len(h) == 2:
+	//		fp = h[1] + "/" + h[0] + r.URL.Path
+	//	case len(h) == 3:
+	//		fp = h[2] + "/" + h[1] + r.URL.Path
+	//		ref = h[0]
+	//	}
+	//}
 
 	f, err := m.Client.Open(fp, ref)
 	if err != nil {
